@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Contracts;
+using LoggerService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GamesStore.Extensions
 {
@@ -15,6 +17,11 @@ namespace GamesStore.Extensions
                     .AllowAnyMethod();
                 });
             });
+        }
+
+        public static void ConfigureLoggerServive(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
         }
     }
 }

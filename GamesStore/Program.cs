@@ -1,5 +1,6 @@
 using GamesStore.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using NLog;
 
 namespace GamesStore
 {
@@ -8,9 +9,11 @@ namespace GamesStore
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             // Add services to the container.
             builder.Services.ConfigureCors();
+            builder.Services.ConfigureLoggerServive();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
