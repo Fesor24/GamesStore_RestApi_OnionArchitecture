@@ -1,3 +1,4 @@
+using Contracts;
 using GamesStore.Extensions;
 using GamesStore.Helpers;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -11,6 +12,7 @@ namespace GamesStore
         {
             var builder = WebApplication.CreateBuilder(args);
             LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+           
 
             // Add services to the container.
             builder.Services.ConfigureCors();
@@ -27,6 +29,9 @@ namespace GamesStore
 
             var app = builder.Build();
 
+            var logger = app.Services.GetRequiredService<ILoggerManager>();
+            app.ConfigureExceptionHandler(logger);
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -34,7 +39,11 @@ namespace GamesStore
                 app.UseSwaggerUI();
             }
 
-            app.UseHsts();
+            if (app.Environment.IsProduction())
+            {
+                app.UseHsts();
+            }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseForwardedHeaders(new ForwardedHeadersOptions

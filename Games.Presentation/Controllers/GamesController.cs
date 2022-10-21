@@ -21,16 +21,9 @@ namespace GamesPresentation.Controllers
         [HttpGet]
         public IActionResult GetGames()
         {
-            try
-            {
-                var games = _serviceManager.GamesService.GetAllGames(trackChanges: false);
-                return Ok(games);
-            }
-
-            catch
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
+            var games = _serviceManager.GamesService.GetAllGames(trackChanges: false);
+            return Ok(games);
+            
         }
 
         [HttpGet]

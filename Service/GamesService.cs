@@ -26,20 +26,8 @@ namespace Service
 
         public IEnumerable<GamesDto> GetAllGames(bool trackChanges)
         {
-            try
-            {
-                var games = _unitofTest.games.GetAllGames(trackChanges);
-                return _map.Map<IEnumerable<GamesDto>>(games);
-
-
-
-            }
-
-            catch(Exception ex)
-            {
-                _logger.LogError($"Something went wrong with in the {nameof(GetAllGames)} service methods {ex}");
-                throw;
-            }
+             var games = _unitofTest.games.GetAllGames(trackChanges);
+             return _map.Map<IEnumerable<GamesDto>>(games);
         }
     }
 }
