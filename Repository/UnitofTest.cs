@@ -20,11 +20,11 @@ namespace Repository
             _genreRepository = new Lazy<IGenreRepository>(() => new GenreRepository(context));
             _consoleDeviceRepository = new Lazy<IConsoleDeviceRepository>(() => new ConsoleDeviceRepository(context));
         }
-        public IGamesRepository gamesRepository => _gamesRepository.Value;
+        public IGamesRepository games => _gamesRepository.Value;
 
-        public IGenreRepository genreRepository => _genreRepository.Value;
+        public IGenreRepository genre => _genreRepository.Value;
 
-        public IConsoleDeviceRepository consoleDeviceRepository => _consoleDeviceRepository.Value;
+        public IConsoleDeviceRepository consoleDevice => _consoleDeviceRepository.Value;
 
         public void Dispose()
         {

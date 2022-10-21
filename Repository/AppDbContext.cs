@@ -24,7 +24,7 @@ namespace Repository
    
         }
 
-        public DbSet<Games>? Games { get; set; }
+        public DbSet<Game>? Games { get; set; }
         public DbSet<Genre>? Genres { get; set; }
 
         public DbSet<ConsoleDevice>? ConsoleDevices { get; set; }

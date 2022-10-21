@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Repository.Configuration
 {
-    public class DataConfig: IEntityTypeConfiguration<Games>
+    public class DataConfig: IEntityTypeConfiguration<Game>
     {
 
-        public void Configure(EntityTypeBuilder<Games> builder)
+        public void Configure(EntityTypeBuilder<Game> builder)
         {
             builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
         }

@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Repository.Configuration
 {
-    public class GamesConfiguration : IEntityTypeConfiguration<Games>
+    public class GamesConfiguration : IEntityTypeConfiguration<Game>
     {
-        public void Configure(EntityTypeBuilder<Games> builder)
+        public void Configure(EntityTypeBuilder<Game> builder)
         {
             builder.HasData(
-                new Games
+                new Game
                 {
                     Id = 1,
                     Name = "Resident Evil",
@@ -26,7 +26,7 @@ namespace Repository.Configuration
 
                 },
 
-                 new Games
+                 new Game
                  {
                      Id = 2,
                      Name = "Star Wars",
@@ -38,7 +38,7 @@ namespace Repository.Configuration
 
                  },
 
-                  new Games
+                  new Game
                   {
                       Id = 3,
                       Name = "NBA 2K",
@@ -50,7 +50,7 @@ namespace Repository.Configuration
 
                   },
 
-                   new Games
+                   new Game
                    {
                        Id = 27,
                        Name = "The Witcher 3",
@@ -62,7 +62,7 @@ namespace Repository.Configuration
 
                    },
 
-                    new Games
+                    new Game
                     {
                         Id = 4,
                         Name = "Call of Duty",
@@ -74,7 +74,7 @@ namespace Repository.Configuration
 
                     },
 
-                     new Games
+                     new Game
                      {
                          Id = 5,
                          Name = "Warcraft",
@@ -86,7 +86,7 @@ namespace Repository.Configuration
 
                      },
 
-                      new Games
+                      new Game
                       {
                           Id = 6,
                           Name = "Minecraft",
@@ -98,7 +98,7 @@ namespace Repository.Configuration
 
                       },
 
-                       new Games
+                       new Game
                        {
                            Id = 7,
                            Name = "Grand Theft Auto",
@@ -110,7 +110,7 @@ namespace Repository.Configuration
 
                        },
 
-                        new Games
+                        new Game
                         {
                             Id = 8,
                             Name = "The Sims",
@@ -122,7 +122,7 @@ namespace Repository.Configuration
 
                         },
 
-                         new Games
+                         new Game
                          {
                              Id = 9,
                              Name = "Age of Empires",
@@ -134,7 +134,7 @@ namespace Repository.Configuration
 
                          },
 
-                          new Games
+                          new Game
                           {
                               Id = 10,
                               Name = "Command & Conquer",
@@ -146,7 +146,7 @@ namespace Repository.Configuration
 
                           },
 
-                           new Games
+                           new Game
                            {
                                Id = 11,
                                Name = "DOOM",
@@ -158,7 +158,7 @@ namespace Repository.Configuration
 
                            },
 
-                            new Games
+                            new Game
                             {
                                 Id = 12,
                                 Name = "Half-life",
@@ -170,7 +170,7 @@ namespace Repository.Configuration
 
                             },
 
-                             new Games
+                             new Game
                              {
                                  Id = 13,
                                  Name = "Gears of War",
@@ -182,7 +182,7 @@ namespace Repository.Configuration
 
                              },
 
-                              new Games
+                              new Game
                               {
                                   Id = 14,
                                   Name = "The Division",
@@ -194,7 +194,7 @@ namespace Repository.Configuration
 
                               },
 
-                               new Games
+                               new Game
                                {
                                    Id = 15,
                                    Name = "Halo",
@@ -206,7 +206,7 @@ namespace Repository.Configuration
 
                                },
 
-                                new Games
+                                new Game
                                 {
                                     Id = 16,
                                     Name = "Skyrim",
@@ -218,7 +218,7 @@ namespace Repository.Configuration
 
                                 },
 
-                                 new Games
+                                 new Game
                                  {
                                      Id = 17,
                                      Name = "Fallout 4",
@@ -230,7 +230,7 @@ namespace Repository.Configuration
 
                                  },
 
-                                  new Games
+                                  new Game
                                   {
                                       Id = 18,
                                       Name = "Forza Motorsport",
@@ -242,7 +242,7 @@ namespace Repository.Configuration
 
                                   },
 
-                                   new Games
+                                   new Game
                                    {
                                        Id = 19,
                                        Name = "FIFA 2023",
@@ -254,7 +254,7 @@ namespace Repository.Configuration
 
                                    },
 
-                                    new Games
+                                    new Game
                                     {
                                         Id = 20,
                                         Name = "FIFA 2022",
@@ -266,7 +266,7 @@ namespace Repository.Configuration
 
                                     },
 
-                                     new Games
+                                     new Game
                                      {
                                          Id = 21,
                                          Name = "Assassin's Creed",
@@ -278,7 +278,7 @@ namespace Repository.Configuration
 
                                      },
 
-                                      new Games
+                                      new Game
                                       {
                                           Id = 22,
                                           Name = "Monkey Island",
@@ -290,7 +290,7 @@ namespace Repository.Configuration
 
                                       },
 
-                                       new Games
+                                       new Game
                                        {
                                            Id = 23,
                                            Name = "Watch Dogs",
@@ -302,7 +302,7 @@ namespace Repository.Configuration
 
                                        },
 
-                                        new Games
+                                        new Game
                                         {
                                             Id = 24,
                                             Name = "Titanfall",
@@ -314,7 +314,7 @@ namespace Repository.Configuration
 
                                         },
 
-                                        new Games
+                                        new Game
                                         {
                                             Id = 25,
                                             Name = "The Long Dark",
@@ -326,7 +326,7 @@ namespace Repository.Configuration
 
                                         },
 
-                                        new Games
+                                        new Game
                                         {
                                             Id = 26,
                                             Name = "Don't Starve",

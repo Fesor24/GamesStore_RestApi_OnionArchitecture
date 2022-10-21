@@ -1,5 +1,8 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
+using Entities.Models;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +15,31 @@ namespace Service
     {
         private readonly IUnitofTest _unitofTest;
         private readonly ILoggerManager _logger;
+        private readonly IMapper _map;
 
-        public GamesService(IUnitofTest unitofTest, ILoggerManager logger)
+        public GamesService(IUnitofTest unitofTest, ILoggerManager logger, IMapper map)
         {
             _unitofTest = unitofTest;
-            _logger = _logger;
+            _logger = logger;
+            _map = map;
+        }
+
+        public IEnumerable<GamesDto> GetAllGames(bool trackChanges)
+        {
+            try
+            {
+                var games = _unitofTest.games.GetAllGames(trackChanges);
+                return _map.Map<IEnumerable<GamesDto>>(games);
+
+
+
+            }
+
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong with in the {nameof(GetAllGames)} service methos {ex}");
+                throw;
+            }
         }
     }
 }

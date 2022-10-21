@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Service
         private readonly Lazy<IGamesService> _gamesService;
         private readonly Lazy<IGenreService> _genreService;
         private readonly Lazy<IConsoleDeviceService> _consoleDeviceService;
-        public ServiceManager(IUnitofTest unitofTest, ILoggerManager logger)
+        private readonly IMapper _map;
+        public ServiceManager(IUnitofTest unitofTest, ILoggerManager logger, IMapper map)
         {
-            _gamesService = new Lazy<IGamesService>(() => new GamesService(unitofTest, logger));
-            _genreService = new Lazy<IGenreService>(() => new GenreService(unitofTest, logger));
-            _consoleDeviceService = new Lazy<IConsoleDeviceService>(() => new ConsoleDeviceService(unitofTest, logger));
+            _gamesService = new Lazy<IGamesService>(() => new GamesService(unitofTest, logger, map));
+            _genreService = new Lazy<IGenreService>(() => new GenreService(unitofTest, logger, map));
+            _consoleDeviceService = new Lazy<IConsoleDeviceService>(() => new ConsoleDeviceService(unitofTest, logger, map));
+            _map = map;
         }
         public IGamesService GamesService => _gamesService.Value;
 

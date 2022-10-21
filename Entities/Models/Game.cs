@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    public class Games: BaseClass
+    public class Game: BaseClass
     {
         [Required(ErrorMessage ="Name is a required field")]
         public string Name { get; set; } = string.Empty;

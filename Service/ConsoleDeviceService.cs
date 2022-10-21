@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace Service
     {
         private readonly IUnitofTest _unitofTest;
         private readonly ILoggerManager _logger;
-        public ConsoleDeviceService(IUnitofTest unitofTest, ILoggerManager logger)
+        private readonly IMapper _map;
+        public ConsoleDeviceService(IUnitofTest unitofTest, ILoggerManager logger, IMapper map)
         {
             _unitofTest = unitofTest;
             _logger = logger;
+            _map = map;
         }
     }
 }

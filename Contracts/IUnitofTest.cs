@@ -8,9 +8,9 @@ namespace Contracts
 {
     public interface IUnitofTest
     {
-        IGamesRepository gamesRepository { get; }
-        IGenreRepository genreRepository { get; }
-        IConsoleDeviceRepository consoleDeviceRepository { get; }
+        IGamesRepository games { get; }
+        IGenreRepository genre { get; }
+        IConsoleDeviceRepository consoleDevice { get; }
 
         void Complete();
     }

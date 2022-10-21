@@ -1,11 +1,6 @@
 ﻿using Contracts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -37,11 +32,13 @@ namespace Repository
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
             return !trackChanges ? _db.AsNoTracking().Where(expression) : _db.Where(expression);
+            
         }
 
         public void Update(T entity)
         {
             _db.Update(entity);
         }
+
     }
 }

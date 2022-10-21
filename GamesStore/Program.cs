@@ -1,4 +1,5 @@
 using GamesStore.Extensions;
+using GamesStore.Helpers;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -17,10 +18,12 @@ namespace GamesStore
             builder.Services.ConfigureUnitofTest();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureDbContext(builder.Configuration);
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddApplicationPart(typeof(Games.Presentation.AssemblyReference).Assembly);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var app = builder.Build();
 
