@@ -12,7 +12,11 @@ namespace Repository
     {
         public GenreRepository(AppDbContext context): base(context)
         {
-                
+                   
         }
+
+        public IEnumerable<Genre> GetAllGenres(bool trackChanges) =>
+            FindAll(trackChanges)
+            .ToList();
     }
 }

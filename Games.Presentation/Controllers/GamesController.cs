@@ -33,5 +33,35 @@ namespace GamesPresentation.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("genre")]
+        public IActionResult GetGenre()
+        {
+            try
+            {
+                var allGenre = _serviceManager.GenreService.GetAllGenres(trackChanges: false);
+                return Ok(allGenre);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpGet]
+        [Route("console")]
+        public IActionResult GetAllConsole()
+        {
+            try
+            {
+                var allConsole = _serviceManager.ConsoleDeviceService.GetAllDevice(trackChanges: false);
+                return Ok(allConsole);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }

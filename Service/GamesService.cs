@@ -37,7 +37,7 @@ namespace Service
 
             catch(Exception ex)
             {
-                _logger.LogError($"Something went wrong with in the {nameof(GetAllGames)} service methos {ex}");
+                _logger.LogError($"Something went wrong with in the {nameof(GetAllGames)} service methods {ex}");
                 throw;
             }
         }

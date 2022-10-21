@@ -14,5 +14,9 @@ namespace Repository
         {
 
         }
+
+        public IEnumerable<ConsoleDevice> GetAllDevice(bool trackChanges) =>
+            FindAll(trackChanges)
+            .ToList();
     }
 }

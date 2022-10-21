@@ -9,6 +9,8 @@ namespace GamesStore.Helpers
         public MappingProfile()
         {
             CreateMap<Game, GamesDto>();
+            CreateMap<ConsoleDevice, ConsoleDto>();
+            CreateMap<Genre, GenreDto>();
         }
     }
 }
