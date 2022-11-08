@@ -14,6 +14,6 @@ namespace Entities.Models
         public string Name { get; set; } = string.Empty;
         [Required(ErrorMessage ="Description is a required field")]
         public string Description { get; set; } = string.Empty;
-        public ICollection<Game>? Games { get; set; }
+        public ICollection<Game> Games { get; set; } = new List<Game>();
     }
 }

@@ -18,7 +18,6 @@ namespace Shared.DTO
 
         public Decimal Price { get; set; }
         
-        public int GenreId { get; set; }
         public string Genre { get; set; } = String.Empty;
         public string ConsoleDevice { get; set; } = String.Empty;
     }

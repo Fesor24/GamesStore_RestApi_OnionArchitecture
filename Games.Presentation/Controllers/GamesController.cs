@@ -19,9 +19,9 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetGames()
+        public ActionResult GetGames()
         {
-            var games = _serviceManager.GamesService.GetAllGames(trackChanges: false);
+            var games = _serviceManager.GamesService.GetAllGames(false);
             return Ok(games);
             
         }
@@ -30,30 +30,24 @@ namespace GamesPresentation.Controllers
         [Route("genre")]
         public IActionResult GetGenre()
         {
-            try
-            {
-                var allGenre = _serviceManager.GenreService.GetAllGenres(trackChanges: false);
-                return Ok(allGenre);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
+            var allGenre = _serviceManager.GenreService.GetAllGenres(false);
+            return Ok(allGenre);
         }
 
         [HttpGet]
         [Route("console")]
         public IActionResult GetAllConsole()
         {
-            try
-            {
-                var allConsole = _serviceManager.ConsoleDeviceService.GetAllDevice(trackChanges: false);
-                return Ok(allConsole);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
+            var allConsole = _serviceManager.ConsoleDeviceService.GetAllDevice(false);
+            return Ok(allConsole);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult GetGameById([FromRoute] int id)
+        {
+            var game = _serviceManager.GamesService.GetGameById(id);
+            return Ok(game);
         }
 
     }

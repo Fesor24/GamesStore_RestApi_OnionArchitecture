@@ -11,6 +11,6 @@ namespace Entities.Models
     {
         [Required(ErrorMessage="Console name is a required field")]
         public string Name { get; set; } = string.Empty;
-        public ICollection<Game>? Games { get; set; }
+        public ICollection<Game> Games { get; set; } = new List<Game>();
     }
 }

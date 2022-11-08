@@ -28,6 +28,7 @@ namespace Service
             try
             {
                 var allGenres = _unitofTest.genre.GetAllGenres(trackChanges);
+
                 return _map.Map<IEnumerable<GenreDto>>(allGenres);
             }
             catch(Exception ex)

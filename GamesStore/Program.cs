@@ -2,7 +2,9 @@ using Contracts;
 using GamesStore.Extensions;
 using GamesStore.Helpers;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using NLog;
+using Repository;
 
 namespace GamesStore
 {
@@ -17,11 +19,14 @@ namespace GamesStore
             // Add services to the container.
             builder.Services.ConfigureCors();
             builder.Services.ConfigureLoggerServive();
+            
             builder.Services.ConfigureUnitofTest();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureDbContext(builder.Configuration);
             builder.Services.AddControllers()
                 .AddApplicationPart(typeof(Games.Presentation.AssemblyReference).Assembly);
+            //.AddNewtonsoftJson(
+            //    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

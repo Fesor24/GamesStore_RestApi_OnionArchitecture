@@ -6,6 +6,7 @@ using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,8 +27,25 @@ namespace Service
 
         public IEnumerable<GamesDto> GetAllGames(bool trackChanges)
         {
-             var games = _unitofTest.games.GetAllGames(trackChanges);
-             return _map.Map<IEnumerable<GamesDto>>(games);
+            try
+            {
+                var games =  _unitofTest.games.GetAllGames(trackChanges);
+                return _map.Map<IEnumerable<GamesDto>>(games);
+            }
+
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the {nameof(GetAllGames)} service method {ex}");
+                throw;
+            }
+            
+        }
+
+
+        public GamesDto GetGameById(int id)
+        {
+            var game= _unitofTest.games.GetGameById(id);
+            return _map.Map<GamesDto>(game);
         }
     }
 }

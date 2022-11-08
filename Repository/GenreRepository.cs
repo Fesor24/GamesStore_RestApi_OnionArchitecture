@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,11 @@ namespace Repository
         }
 
         public IEnumerable<Genre> GetAllGenres(bool trackChanges) =>
-            FindAll(trackChanges)
+            GetAll(trackChanges)
+            .OrderBy(c => c.Name)
             .ToList();
+       
+            
+
     }
 }

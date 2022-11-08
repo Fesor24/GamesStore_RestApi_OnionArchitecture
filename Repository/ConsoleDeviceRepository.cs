@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,10 @@ namespace Repository
         }
 
         public IEnumerable<ConsoleDevice> GetAllDevice(bool trackChanges) =>
-            FindAll(trackChanges)
+            GetAll(trackChanges)
+            .OrderBy(x => x.Name)
             .ToList();
+            
+
     }
 }

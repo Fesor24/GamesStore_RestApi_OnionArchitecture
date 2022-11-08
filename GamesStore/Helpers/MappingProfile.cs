@@ -8,7 +8,9 @@ namespace GamesStore.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<Game, GamesDto>();
+            CreateMap<Game, GamesDto>()
+                .ForMember(x => x.Genre, b=> b.MapFrom(c=> c.Genre.Name))
+                .ForMember(x => x.ConsoleDevice, b => b.MapFrom(d => d.ConsoleDevice.Name));
             CreateMap<ConsoleDevice, ConsoleDto>();
             CreateMap<Genre, GenreDto>();
         }

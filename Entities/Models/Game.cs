@@ -21,9 +21,9 @@ namespace Entities.Models
         public Decimal Price { get; set; }
         [ForeignKey(nameof(Genre))]
         public int GenreId { get; set; }
-        public Genre? Genre { get; set; }
+        public Genre? Genre { get; set; } 
         [ForeignKey(nameof(ConsoleDevice))]
         public int ConsoleId { get; set; }
-        public ConsoleDevice? ConsoleDevice { get; set; }
+        public ConsoleDevice? ConsoleDevice { get; set; } 
     }
 }

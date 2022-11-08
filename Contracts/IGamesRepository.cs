@@ -11,5 +11,8 @@ namespace Contracts
     public interface IGamesRepository
     {
         IEnumerable<Game> GetAllGames(bool trackChanges);
+        Game GetGameById(int id);
+
+       
     }
 }
