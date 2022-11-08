@@ -60,5 +60,12 @@ namespace GamesPresentation.Controllers
             return CreatedAtRoute("GameById", new { id = game.id }, game);
         }
 
+        [HttpDelete("{id:int}")]
+        public IActionResult DeleteGame(int id, bool trackChanges)
+        {
+            _serviceManager.GamesService.DeleteGame(id, false);
+            return NoContent();
+        }
+
     }
 }

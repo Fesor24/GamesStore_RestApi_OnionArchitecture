@@ -15,6 +15,8 @@ namespace Contracts
 
         void CreateGame(Game game);
 
+        void DeleteGame(Game game);
+
        
     }
 }

@@ -16,5 +16,7 @@ namespace Service.Contracts
 
         GamesDto CreateGame(GameForCreateDto game);
 
+        void DeleteGame(int id, bool trackChanges);
+
     }
 }

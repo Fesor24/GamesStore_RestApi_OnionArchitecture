@@ -38,6 +38,16 @@ namespace Service
 
         }
 
+        public void DeleteGame(int id, bool trackChanges)
+        {
+            var game = _unit.games.GetGameById(id, trackChanges);
+
+            if (game == null) throw new GameNotFoundException(id);
+
+            _unit.games.DeleteGame(game);
+            _unit.Complete();
+        }
+
         public IEnumerable<GamesDto> GetAllGames(bool trackChanges)
         {
             try

@@ -20,6 +20,8 @@ namespace Repository
         }
 
         public void CreateGame(Game game) => Create(game);
+
+        public void DeleteGame(Game game) => Delete(game);
         
 
         public IEnumerable<Game> GetAllGames(bool trackChanges) =>
