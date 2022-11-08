@@ -13,10 +13,10 @@ namespace Service
 {
     internal sealed class GenreService: IGenreService
     {
-        private readonly IUnitofTest _unitofTest;
+        private readonly IUnitOfWork _unitofTest;
         private readonly ILoggerManager _logger;
         private readonly IMapper _map;
-        public GenreService(IUnitofTest unitofTest, ILoggerManager logger, IMapper map)
+        public GenreService(IUnitOfWork unitofTest, ILoggerManager logger, IMapper map)
         {
             _unitofTest = unitofTest;
             _logger = logger;

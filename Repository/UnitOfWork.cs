@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class UnitofTest : IUnitofTest, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly AppDbContext _context;
         private readonly Lazy<IGamesRepository> _gamesRepository;
         private readonly Lazy<IGenreRepository> _genreRepository;
         private readonly Lazy<IConsoleDeviceRepository> _consoleDeviceRepository;
-        public UnitofTest(AppDbContext context)
+        public UnitOfWork(AppDbContext context)
         {
             _context = context;
             _gamesRepository = new Lazy<IGamesRepository>(() => new GamesRepository(context));

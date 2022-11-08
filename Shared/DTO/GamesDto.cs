@@ -10,6 +10,7 @@ namespace Shared.DTO
 {
     public record GamesDto
     {
+        public int id { get; set; }
         public string name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         

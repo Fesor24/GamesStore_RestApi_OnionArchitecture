@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.ErrorModel;
+using Entities.Exceptions;
 using LoggerService;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@ namespace GamesStore.Extensions
 
         public static void ConfigureUnitofTest(this IServiceCollection services)
         {
-            services.AddScoped<IUnitofTest, UnitofTest>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         public static void ConfigureServiceManager(this IServiceCollection services)
@@ -62,12 +63,18 @@ namespace GamesStore.Extensions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
+                        context.Response.StatusCode = contextFeature.Error switch
+                        {
+                            NotFoundException => StatusCodes.Status404NotFound,
+                            _ => StatusCodes.Status500InternalServerError
+                        };
+
                         logger.LogError($"Something went wrong: {contextFeature.Error}");
 
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
-                            Message = "Internal Server Error."
+                            Message = contextFeature.Error.Message
                         }.ToString());
                     }
                 });

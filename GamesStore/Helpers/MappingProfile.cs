@@ -13,6 +13,8 @@ namespace GamesStore.Helpers
                 .ForMember(x => x.ConsoleDevice, b => b.MapFrom(d => d.ConsoleDevice.Name));
             CreateMap<ConsoleDevice, ConsoleDto>();
             CreateMap<Genre, GenreDto>();
+            CreateMap<GameForCreateDto, Game>();
+                
         }
     }
 }

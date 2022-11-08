@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,11 +44,20 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name ="GameById")]
         public IActionResult GetGameById([FromRoute] int id)
         {
-            var game = _serviceManager.GamesService.GetGameById(id);
+            var game = _serviceManager.GamesService.GetGameById(id, false);
             return Ok(game);
+        }
+
+        [HttpPost]
+        public IActionResult CreateGame([FromBody] GameForCreateDto games)
+        {
+            if (games == null) return BadRequest("GamesForCreateDto is null");
+
+            var game = _serviceManager.GamesService.CreateGame(games);
+            return CreatedAtRoute("GameById", new { id = game.id }, game);
         }
 
     }

@@ -12,7 +12,9 @@ namespace Service.Contracts
     public interface IGamesService
     {
         IEnumerable<GamesDto> GetAllGames(bool trackChanges);
-        GamesDto GetGameById(int id);
+        GamesDto GetGameById(int id, bool trackChanges);
+
+        GamesDto CreateGame(GameForCreateDto game);
 
     }
 }

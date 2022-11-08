@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public interface IUnitofTest
+    public interface IUnitOfWork
     {
         IGamesRepository games { get; }
         IGenreRepository genre { get; }

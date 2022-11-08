@@ -15,7 +15,7 @@ namespace Service
         private readonly Lazy<IGenreService> _genreService;
         private readonly Lazy<IConsoleDeviceService> _consoleDeviceService;
         private readonly IMapper _map;
-        public ServiceManager(IUnitofTest unitofTest, ILoggerManager logger, IMapper map)
+        public ServiceManager(IUnitOfWork unitofTest, ILoggerManager logger, IMapper map)
         {
             _gamesService = new Lazy<IGamesService>(() => new GamesService(unitofTest, logger, map));
             _genreService = new Lazy<IGenreService>(() => new GenreService(unitofTest, logger, map));
