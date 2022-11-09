@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.DTO;
 using Entities.Models;
+using Shared.RequestFeatures;
 
 namespace Service.Contracts
 {
     public interface IGamesService
     {
-        Task<IEnumerable<GamesDto>> GetAllGames(bool trackChanges);
+        Task<(IEnumerable<GamesDto> games, MetaData metaData)> GetAllGames(bool trackChanges, GameParameters gameParameters);
         Task<GamesDto> GetGameById(int id, bool trackChanges);
 
         Task<GamesDto> CreateGame(GameForCreateDto game);

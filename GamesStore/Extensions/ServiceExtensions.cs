@@ -23,7 +23,8 @@ namespace GamesStore.Extensions
                 {
                     builder.WithOrigins("https://localhost.com")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Pagination");
                 });
             });
         }

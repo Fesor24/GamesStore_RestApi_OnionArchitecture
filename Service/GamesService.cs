@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Exceptions;
+using Shared.RequestFeatures;
 
 namespace Service
 {
@@ -48,12 +49,14 @@ namespace Service
             await _unit.Complete();
         }
 
-        public async Task<IEnumerable<GamesDto>> GetAllGames(bool trackChanges)
+        public async Task<(IEnumerable<GamesDto> games, MetaData metaData)> GetAllGames(bool trackChanges, GameParameters gameParameters)
         {
             try
             {
-                var games =  await _unit.games.GetAllGames(trackChanges);
-                return _map.Map<IEnumerable<GamesDto>>(games);
+                var gamesWithMetaData =  await _unit.games.GetAllGames(trackChanges, gameParameters);
+                var gamesDto = _map.Map<IEnumerable<GamesDto>>(gamesWithMetaData);
+
+                return (games: gamesDto, metaData: gamesWithMetaData.metaData);
             }
 
             catch(Exception ex)

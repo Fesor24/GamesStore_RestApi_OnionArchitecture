@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Contracts
 {
     public interface IGamesRepository
     {
-        Task<IEnumerable<Game> >GetAllGames(bool trackChanges);
+        Task<PagedList<Game>>GetAllGames(bool trackChanges, GameParameters gameParameters);
         Task<Game> GetGameById(int id, bool trackChanges);
 
         void CreateGame(Game game);

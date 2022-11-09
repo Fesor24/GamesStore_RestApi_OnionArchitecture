@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GamesPresentation.Controllers
@@ -21,10 +23,13 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetGames()
+        public async Task<ActionResult> GetGames([FromQuery] GameParameters gameParameters)
         {
-            var games = await _serviceManager.GamesService.GetAllGames(false);
-            return Ok(games);
+            var pagedResult = await _serviceManager.GamesService.GetAllGames(false, gameParameters);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+
+            return Ok(pagedResult.games);
             
         }
 
