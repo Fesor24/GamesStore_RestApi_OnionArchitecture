@@ -16,7 +16,13 @@ namespace Service.Contracts
 
         GamesDto CreateGame(GameForCreateDto game);
 
+        void UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges);
+
         void DeleteGame(int id, bool trackChanges);
+
+        (GameForUpdateDto gameToPatch, Game gameEntity) GetGameForPatch(int gameId, bool trackChanges);
+
+        void SaveChangesForPatch(GameForUpdateDto gameToPatch, Game game);
 
     }
 }

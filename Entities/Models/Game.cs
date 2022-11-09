@@ -10,8 +10,8 @@ namespace Entities.Models
 {
     public class Game: BaseClass
     {
-        [Required(ErrorMessage ="Name is a required field")]
-        public string Name { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Name is a required field")]
+        public string Name { get; set; } = String.Empty;
         [Required(ErrorMessage ="Description is a required field")]
         public string Description { get; set; } = string.Empty;
         [Required(ErrorMessage ="Imageurl is a required field")]

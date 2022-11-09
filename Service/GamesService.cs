@@ -81,5 +81,35 @@ namespace Service
             }
             
         }
+
+        public (GameForUpdateDto gameToPatch, Game gameEntity) GetGameForPatch(int gameId, bool trackChanges)
+        {
+            var gameEntity = _unit.games.GetGameById(gameId, trackChanges);
+
+            if (gameEntity == null) throw new GameNotFoundException(gameId);
+
+            var gameToPatch = _map.Map<GameForUpdateDto>(gameEntity);
+
+            return (gameToPatch, gameEntity);
+        }
+
+        public void SaveChangesForPatch(GameForUpdateDto gameToPatch, Game gameEntity)
+        {
+            _map.Map(gameToPatch, gameEntity);
+            _unit.Complete();
+        }
+
+        public void UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges)
+        {
+            var game = _unit.games.GetGameById(gameId, trackChanges);
+
+            if (game == null) throw new GameNotFoundException(gameId);
+
+            _map.Map(gameForUpdateDto, game);
+
+            _unit.Complete();
+
+
+        }
     }
 }

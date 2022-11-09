@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
 using System;
@@ -54,7 +55,10 @@ namespace GamesPresentation.Controllers
         [HttpPost]
         public IActionResult CreateGame([FromBody] GameForCreateDto games)
         {
-            if (games == null) return BadRequest("GamesForCreateDto is null");
+            if (games is null) return BadRequest("GamesForCreateDto is null");
+
+            if (!ModelState.IsValid) return UnprocessableEntity(ModelState);
+            
 
             var game = _serviceManager.GamesService.CreateGame(games);
             return CreatedAtRoute("GameById", new { id = game.id }, game);
@@ -64,6 +68,36 @@ namespace GamesPresentation.Controllers
         public IActionResult DeleteGame(int id, bool trackChanges)
         {
             _serviceManager.GamesService.DeleteGame(id, false);
+            return NoContent();
+        }
+
+        [HttpPut("{id:int}")]
+        public IActionResult UpdateGame(int id, GameForUpdateDto  gamesForUpdateDto,bool trackChanges)
+        {
+            if (gamesForUpdateDto is null) return BadRequest("gamesForUpdateDto is null");
+
+            if (!ModelState.IsValid) return UnprocessableEntity(ModelState);
+
+            _serviceManager.GamesService.UpdateGame(id, gamesForUpdateDto, true);
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id:int}")]
+        public IActionResult PartiallyUpdateEmployeeForCompany(int id, [FromBody] JsonPatchDocument<GameForUpdateDto> gamePatch)
+        {
+            if (gamePatch == null) return BadRequest("gamePatch sent from client is null");
+
+            var result = _serviceManager.GamesService.GetGameForPatch(id, true);
+
+            gamePatch.ApplyTo(result.gameToPatch, ModelState);
+
+            TryValidateModel(result.gameToPatch);
+
+            if (!ModelState.IsValid) return UnprocessableEntity(ModelState);
+
+            _serviceManager.GamesService.SaveChangesForPatch(result.gameToPatch, result.gameEntity);
+
             return NoContent();
         }
 

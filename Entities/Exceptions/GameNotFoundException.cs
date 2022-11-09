@@ -8,7 +8,7 @@ namespace Entities.Exceptions
 {
     public sealed class GameNotFoundException: NotFoundException
     {
-        public GameNotFoundException(int id) : base($"The game with id: {id} doe not exist in the database")
+        public GameNotFoundException(int id) : base($"The game with id: {id} does not exist in the database")
         {
 
         }

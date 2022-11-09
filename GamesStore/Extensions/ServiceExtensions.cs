@@ -3,6 +3,7 @@ using Entities.ErrorModel;
 using Entities.Exceptions;
 using LoggerService;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
@@ -48,6 +49,14 @@ namespace GamesStore.Extensions
             {
 
                 options.UseSqlServer(configuration.GetConnectionString("Default"));
+            });
+        }
+
+        public static void ConfigureApiBehavior(this IServiceCollection services)
+        {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
             });
         }
 

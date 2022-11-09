@@ -14,6 +14,7 @@ namespace GamesStore.Helpers
             CreateMap<ConsoleDevice, ConsoleDto>();
             CreateMap<Genre, GenreDto>();
             CreateMap<GameForCreateDto, Game>();
+            CreateMap<GameForUpdateDto, Game>().ReverseMap();
                 
         }
     }
