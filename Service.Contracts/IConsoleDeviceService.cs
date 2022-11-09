@@ -10,6 +10,6 @@ namespace Service.Contracts
 {
     public interface IConsoleDeviceService
     {
-        IEnumerable<ConsoleDto> GetAllDevice(bool trackChanges);
+        Task<IEnumerable<ConsoleDto>> GetAllDevice(bool trackChanges);
     }
 }

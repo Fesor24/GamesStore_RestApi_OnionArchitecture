@@ -9,6 +9,6 @@ namespace Contracts
 {
     public interface IConsoleDeviceRepository
     {
-        IEnumerable<ConsoleDevice> GetAllDevice(bool trackChanges);
+        Task<IEnumerable<ConsoleDevice>> GetAllDevice(bool trackChanges);
     }
 }

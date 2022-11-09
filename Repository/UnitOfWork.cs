@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,11 +33,7 @@ namespace Repository
             GC.SuppressFinalize(this);
         }
 
-        public void Complete()
-        {
-            _context.SaveChanges();
-        }
-
-        
+        public async Task Complete() => await _context.SaveChangesAsync();
+    
     }
 }

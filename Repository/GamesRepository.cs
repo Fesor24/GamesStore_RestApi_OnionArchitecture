@@ -24,21 +24,21 @@ namespace Repository
         public void DeleteGame(Game game) => Delete(game);
         
 
-        public IEnumerable<Game> GetAllGames(bool trackChanges) =>
-            GetAll(trackChanges)
+        public async Task<IEnumerable<Game>> GetAllGames(bool trackChanges) =>
+            await GetAll(trackChanges)
             .Include(x => x.Genre)
             .Include(x => x.ConsoleDevice)
             .OrderBy(c => c.Name)
-            .ToList();
+            .ToListAsync();
 
 
-        public Game GetGameById(int id, bool trackChanges) =>
+        public async Task<Game> GetGameById(int id, bool trackChanges) =>
 
-            GetByCondition(x => x.Id == id, trackChanges)
+            await GetByCondition(x => x.Id == id, trackChanges)
             .Include(x => x.Genre)
             .Include(x => x.ConsoleDevice)
             .OrderBy(x => x.Name)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
             
     }
 }

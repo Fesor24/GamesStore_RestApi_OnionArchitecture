@@ -9,6 +9,6 @@ namespace Contracts
 {
     public interface IGenreRepository
     {
-        IEnumerable<Genre> GetAllGenres(bool trackChanges);
+        Task<IEnumerable<Genre>> GetAllGenres(bool trackChanges);
     }
 }

@@ -16,10 +16,10 @@ namespace Repository
                    
         }
 
-        public IEnumerable<Genre> GetAllGenres(bool trackChanges) =>
-            GetAll(trackChanges)
+        public async Task<IEnumerable<Genre>> GetAllGenres(bool trackChanges) =>
+            await GetAll(trackChanges)
             .OrderBy(c => c.Name)
-            .ToList();
+            .ToListAsync();
        
             
 

@@ -12,6 +12,6 @@ namespace Contracts
         IGenreRepository genre { get; }
         IConsoleDeviceRepository consoleDevice { get; }
 
-        void Complete();
+        Task Complete();
     }
 }

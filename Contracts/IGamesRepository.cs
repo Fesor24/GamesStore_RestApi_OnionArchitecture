@@ -10,8 +10,8 @@ namespace Contracts
 {
     public interface IGamesRepository
     {
-        IEnumerable<Game> GetAllGames(bool trackChanges);
-        Game GetGameById(int id, bool trackChanges);
+        Task<IEnumerable<Game> >GetAllGames(bool trackChanges);
+        Task<Game> GetGameById(int id, bool trackChanges);
 
         void CreateGame(Game game);
 

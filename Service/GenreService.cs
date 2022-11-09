@@ -23,11 +23,11 @@ namespace Service
             _map = map;
         }
 
-        public IEnumerable<GenreDto> GetAllGenres(bool trackChanges)
+        public async Task<IEnumerable<GenreDto>> GetAllGenres(bool trackChanges)
         {
             try
             {
-                var allGenres = _unitofTest.genre.GetAllGenres(trackChanges);
+                var allGenres = await _unitofTest.genre.GetAllGenres(trackChanges);
 
                 return _map.Map<IEnumerable<GenreDto>>(allGenres);
             }

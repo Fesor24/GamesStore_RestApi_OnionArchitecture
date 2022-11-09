@@ -26,33 +26,33 @@ namespace Service
             _map = map;
         }
 
-        public GamesDto CreateGame(GameForCreateDto game)
+        public async Task<GamesDto> CreateGame(GameForCreateDto game)
         {
             var gameEntity = _map.Map<Game>(game);
 
             _unit.games.CreateGame(gameEntity);
-            _unit.Complete();
+            await _unit.Complete();
 
             var gameToReturn = _map.Map<GamesDto>(gameEntity);
             return gameToReturn;
 
         }
 
-        public void DeleteGame(int id, bool trackChanges)
+        public async Task DeleteGame(int id, bool trackChanges)
         {
-            var game = _unit.games.GetGameById(id, trackChanges);
+            var game = await _unit.games.GetGameById(id, trackChanges);
 
             if (game == null) throw new GameNotFoundException(id);
 
             _unit.games.DeleteGame(game);
-            _unit.Complete();
+            await _unit.Complete();
         }
 
-        public IEnumerable<GamesDto> GetAllGames(bool trackChanges)
+        public async Task<IEnumerable<GamesDto>> GetAllGames(bool trackChanges)
         {
             try
             {
-                var games =  _unit.games.GetAllGames(trackChanges);
+                var games =  await _unit.games.GetAllGames(trackChanges);
                 return _map.Map<IEnumerable<GamesDto>>(games);
             }
 
@@ -65,11 +65,11 @@ namespace Service
         }
 
 
-        public GamesDto GetGameById(int id, bool trackChanges)
+        public async Task<GamesDto> GetGameById(int id, bool trackChanges)
         {
             try
             {
-                var game = _unit.games.GetGameById(id, trackChanges);
+                var game = await _unit.games.GetGameById(id, trackChanges);
                 if (game == null) throw new GameNotFoundException(id);
 
                 return _map.Map<GamesDto>(game);
@@ -82,9 +82,9 @@ namespace Service
             
         }
 
-        public (GameForUpdateDto gameToPatch, Game gameEntity) GetGameForPatch(int gameId, bool trackChanges)
+        public async Task<(GameForUpdateDto gameToPatch, Game gameEntity)> GetGameForPatch(int gameId, bool trackChanges)
         {
-            var gameEntity = _unit.games.GetGameById(gameId, trackChanges);
+            var gameEntity = await _unit.games.GetGameById(gameId, trackChanges);
 
             if (gameEntity == null) throw new GameNotFoundException(gameId);
 
@@ -93,21 +93,21 @@ namespace Service
             return (gameToPatch, gameEntity);
         }
 
-        public void SaveChangesForPatch(GameForUpdateDto gameToPatch, Game gameEntity)
+        public async Task SaveChangesForPatch(GameForUpdateDto gameToPatch, Game gameEntity)
         {
             _map.Map(gameToPatch, gameEntity);
-            _unit.Complete();
+            await _unit.Complete();
         }
 
-        public void UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges)
+        public async Task UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges)
         {
-            var game = _unit.games.GetGameById(gameId, trackChanges);
+            var game = await _unit.games.GetGameById(gameId, trackChanges);
 
             if (game == null) throw new GameNotFoundException(gameId);
 
             _map.Map(gameForUpdateDto, game);
 
-            _unit.Complete();
+            await _unit.Complete();
 
 
         }

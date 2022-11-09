@@ -16,10 +16,10 @@ namespace Repository
 
         }
 
-        public IEnumerable<ConsoleDevice> GetAllDevice(bool trackChanges) =>
-            GetAll(trackChanges)
+        public async Task<IEnumerable<ConsoleDevice>> GetAllDevice(bool trackChanges) =>
+            await GetAll(trackChanges)
             .OrderBy(x => x.Name)
-            .ToList();
+            .ToListAsync();
             
 
     }

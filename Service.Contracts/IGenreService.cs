@@ -10,6 +10,6 @@ namespace Service.Contracts
 {
     public interface IGenreService
     {
-        IEnumerable<GenreDto> GetAllGenres(bool trackChanges);
+        Task<IEnumerable<GenreDto>> GetAllGenres(bool trackChanges);
     }
 }

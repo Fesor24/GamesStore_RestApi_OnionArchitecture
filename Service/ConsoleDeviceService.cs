@@ -23,11 +23,11 @@ namespace Service
             _map = map;
         }
 
-        public IEnumerable<ConsoleDto> GetAllDevice(bool trackChanges)
+        public async Task<IEnumerable<ConsoleDto>> GetAllDevice(bool trackChanges)
         {
             try
             {
-                var allConsole = _unitofTest.consoleDevice.GetAllDevice(trackChanges);
+                var allConsole = await _unitofTest.consoleDevice.GetAllDevice(trackChanges);
                 return _map.Map<IEnumerable<ConsoleDto>>(allConsole);
             }
             catch(Exception ex)

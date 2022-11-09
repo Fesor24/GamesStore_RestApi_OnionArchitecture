@@ -21,53 +21,53 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetGames()
+        public async Task<ActionResult> GetGames()
         {
-            var games = _serviceManager.GamesService.GetAllGames(false);
+            var games = await _serviceManager.GamesService.GetAllGames(false);
             return Ok(games);
             
         }
 
         [HttpGet]
         [Route("genre")]
-        public IActionResult GetGenre()
+        public async Task<IActionResult> GetGenre()
         {
-            var allGenre = _serviceManager.GenreService.GetAllGenres(false);
+            var allGenre = await _serviceManager.GenreService.GetAllGenres(false);
             return Ok(allGenre);
         }
 
         [HttpGet]
         [Route("console")]
-        public IActionResult GetAllConsole()
+        public async Task<IActionResult> GetAllConsole()
         {
-            var allConsole = _serviceManager.ConsoleDeviceService.GetAllDevice(false);
+            var allConsole = await _serviceManager.ConsoleDeviceService.GetAllDevice(false);
             return Ok(allConsole);
         }
 
         [HttpGet]
         [Route("{id:int}", Name ="GameById")]
-        public IActionResult GetGameById([FromRoute] int id)
+        public async Task<IActionResult> GetGameById([FromRoute] int id)
         {
-            var game = _serviceManager.GamesService.GetGameById(id, false);
+            var game = await _serviceManager.GamesService.GetGameById(id, false);
             return Ok(game);
         }
 
         [HttpPost]
-        public IActionResult CreateGame([FromBody] GameForCreateDto games)
+        public async Task<IActionResult> CreateGame([FromBody] GameForCreateDto games)
         {
             if (games is null) return BadRequest("GamesForCreateDto is null");
 
             if (!ModelState.IsValid) return UnprocessableEntity(ModelState);
             
 
-            var game = _serviceManager.GamesService.CreateGame(games);
+            var game = await _serviceManager.GamesService.CreateGame(games);
             return CreatedAtRoute("GameById", new { id = game.id }, game);
         }
 
         [HttpDelete("{id:int}")]
-        public IActionResult DeleteGame(int id, bool trackChanges)
+        public async Task<IActionResult> DeleteGame(int id, bool trackChanges)
         {
-            _serviceManager.GamesService.DeleteGame(id, false);
+            await _serviceManager.GamesService.DeleteGame(id, false);
             return NoContent();
         }
 
@@ -84,11 +84,11 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public IActionResult PartiallyUpdateEmployeeForCompany(int id, [FromBody] JsonPatchDocument<GameForUpdateDto> gamePatch)
+        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(int id, [FromBody] JsonPatchDocument<GameForUpdateDto> gamePatch)
         {
             if (gamePatch == null) return BadRequest("gamePatch sent from client is null");
 
-            var result = _serviceManager.GamesService.GetGameForPatch(id, true);
+            var result = await _serviceManager.GamesService.GetGameForPatch(id, true);
 
             gamePatch.ApplyTo(result.gameToPatch, ModelState);
 
@@ -96,7 +96,7 @@ namespace GamesPresentation.Controllers
 
             if (!ModelState.IsValid) return UnprocessableEntity(ModelState);
 
-            _serviceManager.GamesService.SaveChangesForPatch(result.gameToPatch, result.gameEntity);
+            await _serviceManager.GamesService.SaveChangesForPatch(result.gameToPatch, result.gameEntity);
 
             return NoContent();
         }

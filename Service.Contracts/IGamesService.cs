@@ -11,18 +11,18 @@ namespace Service.Contracts
 {
     public interface IGamesService
     {
-        IEnumerable<GamesDto> GetAllGames(bool trackChanges);
-        GamesDto GetGameById(int id, bool trackChanges);
+        Task<IEnumerable<GamesDto>> GetAllGames(bool trackChanges);
+        Task<GamesDto> GetGameById(int id, bool trackChanges);
 
-        GamesDto CreateGame(GameForCreateDto game);
+        Task<GamesDto> CreateGame(GameForCreateDto game);
 
-        void UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges);
+        Task UpdateGame(int gameId, GameForUpdateDto gameForUpdateDto, bool trackChanges);
 
-        void DeleteGame(int id, bool trackChanges);
+        Task DeleteGame(int id, bool trackChanges);
 
-        (GameForUpdateDto gameToPatch, Game gameEntity) GetGameForPatch(int gameId, bool trackChanges);
+        Task<(GameForUpdateDto gameToPatch, Game gameEntity)> GetGameForPatch(int gameId, bool trackChanges);
 
-        void SaveChangesForPatch(GameForUpdateDto gameToPatch, Game game);
+        Task SaveChangesForPatch(GameForUpdateDto gameToPatch, Game game);
 
     }
 }
