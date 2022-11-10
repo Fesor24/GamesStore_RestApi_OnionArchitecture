@@ -23,6 +23,7 @@ namespace GamesPresentation.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public async Task<ActionResult> GetGames([FromQuery] GameParameters gameParameters)
         {
             var pagedResult = await _serviceManager.GamesService.GetAllGames(false, gameParameters);
@@ -105,6 +106,13 @@ namespace GamesPresentation.Controllers
             await _serviceManager.GamesService.SaveChangesForPatch(result.gameToPatch, result.gameEntity);
 
             return NoContent();
+        }
+
+        [HttpOptions]
+        public IActionResult GetGamesOptions()
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, PATCH, DELETE");
+            return Ok();
         }
 
     }
