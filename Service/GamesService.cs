@@ -85,6 +85,7 @@ namespace Service
             
         }
 
+
         public async Task<(GameForUpdateDto gameToPatch, Game gameEntity)> GetGameForPatch(int gameId, bool trackChanges)
         {
             var gameEntity = await _unit.games.GetGameById(gameId, trackChanges);

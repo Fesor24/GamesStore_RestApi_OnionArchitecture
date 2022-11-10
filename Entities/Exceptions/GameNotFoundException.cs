@@ -12,5 +12,10 @@ namespace Entities.Exceptions
         {
 
         }
+
+        public GameNotFoundException(string name) : base($"The game with name: {name} does not exist in the database")
+        {
+
+        }
     }
 }

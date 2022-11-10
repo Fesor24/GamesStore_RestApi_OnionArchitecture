@@ -29,6 +29,11 @@ namespace Shared.RequestFeatures
 
     public class GameParameters: RequestParameters
     {
+        public string console { get; set; } = String.Empty;
+
+        public string genre { get; set; } = String.Empty;
+
+        public string? searchName { get; set; }
 
     }
 }
