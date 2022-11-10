@@ -37,6 +37,7 @@ namespace GamesStore
             {
                 options.ReturnHttpNotAcceptable = true;
                 options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
+                options.CacheProfiles.Add("180SecsDuration", new CacheProfile { Duration = 180 });
             })
                 .AddApplicationPart(typeof(Games.Presentation.AssemblyReference).Assembly).AddNewtonsoftJson();
            
@@ -44,7 +45,12 @@ namespace GamesStore
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-            
+            builder.Services.ConfigureApiVersioning();
+            builder.Services.ConfigureResponseCaching();
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
+            builder.Services.ConfigureJwts(builder.Configuration);
+
 
             var app = builder.Build();
 
@@ -70,6 +76,10 @@ namespace GamesStore
                 ForwardedHeaders = ForwardedHeaders.All
             });
             app.UseCors("CorsPolicy");
+
+            app.UseResponseCaching();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

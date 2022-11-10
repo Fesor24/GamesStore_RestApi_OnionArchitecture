@@ -11,5 +11,6 @@ namespace Service.Contracts
         IGamesService GamesService { get; }
         IGenreService GenreService { get; }
         IConsoleDeviceService ConsoleDeviceService { get; }
+        IAccountService AccountService { get; }
     }
 }

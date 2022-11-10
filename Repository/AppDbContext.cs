@@ -5,12 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 
 namespace Repository
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions options):base(options)
         {

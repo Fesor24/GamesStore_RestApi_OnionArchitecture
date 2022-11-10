@@ -15,6 +15,7 @@ namespace GamesStore.Helpers
             CreateMap<Genre, GenreDto>();
             CreateMap<GameForCreateDto, Game>();
             CreateMap<GameForUpdateDto, Game>().ReverseMap();
+            CreateMap<UserForRegistrationDto, AppUser>();
                 
         }
     }

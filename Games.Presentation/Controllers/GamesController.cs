@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
@@ -12,8 +13,10 @@ using System.Threading.Tasks;
 
 namespace GamesPresentation.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
+    [ResponseCache(CacheProfileName= "180SecsDuration")]
     public class GamesController: ControllerBase
     {
         private readonly IServiceManager _serviceManager;
@@ -24,6 +27,7 @@ namespace GamesPresentation.Controllers
 
         [HttpGet]
         [HttpHead]
+        [Authorize(Roles = "Manager")]
         public async Task<ActionResult> GetGames([FromQuery] GameParameters gameParameters)
         {
             var pagedResult = await _serviceManager.GamesService.GetAllGames(false, gameParameters);
@@ -52,6 +56,7 @@ namespace GamesPresentation.Controllers
 
         [HttpGet]
         [Route("{id:int}", Name ="GameById")]
+        [ResponseCache(Duration=60)]
         public async Task<IActionResult> GetGameById([FromRoute] int id)
         {
             var game = await _serviceManager.GamesService.GetGameById(id, false);
