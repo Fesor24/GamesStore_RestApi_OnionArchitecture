@@ -68,7 +68,7 @@ namespace Repository
                             .Include(x => x.Genre)
                             .Include(x => x.ConsoleDevice)
                             .Search(gameParameters.searchName)
-                            .OrderBy(c => c.Id)
+                            .Sort(gameParameters.OrderBy)
                             .ToListAsync();
 
 

@@ -25,15 +25,20 @@ namespace Shared.RequestFeatures
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
+
+        public string? OrderBy { get; set; }
     }
 
     public class GameParameters: RequestParameters
     {
+        public GameParameters() => OrderBy = "name";
         public string console { get; set; } = String.Empty;
 
         public string genre { get; set; } = String.Empty;
 
         public string? searchName { get; set; }
+
+        
 
     }
 }
